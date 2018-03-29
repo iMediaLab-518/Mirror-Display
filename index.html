@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Magic Mirror Main Display Design</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link rel="stylesheet" type="text/css" href="Modules/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="Modules/index.css">
+	<script type="text/javascript" src="Modules/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="Modules/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Modules/moment.min.js"></script>
+	<script type="text/javascript" src="Modules/crypto-js.js"></script>
+	<script type="text/javascript" src="Modules/hmac-sha1.js"></script>
+</head>
+
+<body>
+	<div class="screen">
+		<div class="assistant-table padding-10px">
+			<div class="row">
+				<i id="icon-assistant">
+					<div class="circle"></div>
+				</i>
+				<span id="assistant-element">hello</span>
+			</div>
+		</div>
+
+		<div class="healthreport-table">
+			<div class="health-info">
+			</div>
+		</div>
+
+		<div class="information-table padding-10px">
+			<div class="row">
+				<div class="normal-table col-md-6">
+					<div class="row">
+						<div class="timenum col-md-12">
+							<span id="time-element">00:00</span>
+							<span id="second-element">:00</span>
+						</div>
+						<div class="dayinfo col-md-12">
+							<span id="date-element">2018-03-01</span>
+							<span id="week-element">N/A</span>
+						</div>
+					</div>
+				</div>
+				<div class="icon-table col-md-3">
+					<img class="icon-weather" src="Resource/icon-example.png">
+				</div>
+				<div class="info-table col-md-3">
+					<div class="row">
+						<div class="weather col-md-12">
+							<strong>
+								<span id="weather-element">晴</span>
+							</strong>
+						</div>
+						<div class="tempnum col-md-12">
+							<span>Tmp:</span>
+							<span id="temp-element">11</span>
+							<span>℃</span>
+						</div>
+						<div class="humiditynum col-md-12">
+							<span>Hum:</span>
+							<span id="humidity-element">45</span>
+							<span>%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="Modules/index.js"></script>
+
+</html>

@@ -1,1 +1,2 @@
-# Mirrir-Display
+# 健康魔镜主屏显示设计方案
+![魔镜主屏设计](demo.png)
