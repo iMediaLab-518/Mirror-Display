@@ -38,31 +38,22 @@ body {
 
 .healthreport-table {
 	position: absolute;
-	top: 250px;
-	left: -20px;
-	animation: 3s location_trans 0s infinite;
+	top: 200px;
+	/* left: -20px; */
+	/* animation: 3s location_trans 0s infinite; */
 }
 
-@keyframes location_trans {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		transform:translateX(-500px);
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+h3 {
+	font-size: 2.5em;
 }
 
 .health-info {
-	width: 450px;
-	height: 1200px;
-	/* background-color: #ffffff; */
-	border: 2px solid;
-	border-color: #ffffff;
-	border-radius: 20px;
+	font-size: 1.5em;
+}
+
+.video-table {
+	position: absolute;
+	top: 500px;
 }
 
 .icon-weather {

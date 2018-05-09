@@ -1,9 +1,11 @@
 /**
  * 
  * @authors Wang Hanze
- * @date    2018-03-21 17:16:11
- * @version 1.4.0
+ * @date    2018-05-10 02:24:26
+ * @version 1.6.0
  */
+
+/* jshint esversion: 6 */
 
 function fetchContext() {
   let time = moment().format('HH:mm');
@@ -33,19 +35,9 @@ function getWeather(city = 'hangzhou') {
       console.log(weather);
       $('#weather-element').text(weather.now.cond_txt);
       $('#temp-element').text(weather.now.tmp);
-      $('#humidity-element').text(weather.hum);
+      $('#humidity-element').text(weather.now.hum);
     }
   });
-}
-
-function icon_breath() {
-  if ($('#icon-assistant').css('opacity') == 1) {
-    console.log('1');
-    $('#icon-assistant').css('opacity', 0);
-  } else {
-    console.log('0');
-    $('#icon-assistant').css('opacity', 1);
-  }
 }
 
 function voice_assistant(strInput = '') {
@@ -54,12 +46,40 @@ function voice_assistant(strInput = '') {
   let timer = setInterval(event => {
     if (count >= strInput.length) {
       clearInterval(timer);
+      $('#assistant-element').fadeOut(1000);
     } else {
       //icon_breath();
       $('#assistant-element').text($('#assistant-element').text() + strInput[count]);
       count++;
     }
-  }, 300);
+  }, 200);
+}
+
+function getHealthInfo(GATE = '') {
+  let API = '127.0.0.1:' + GATE;
+  $.ajax({
+    type: 'GET',
+    async: false,
+    cache: false,
+    url: url,
+    dataType: 'json',
+    success: (data) => {
+      let health = data;
+      console.log(health);
+      $('#health-1').text();
+      $('.healthreport-table').fadeTo(500, 0.8);
+    }
+  });
+}
+
+function playVideo(video = $('.video-table')) {
+  video.fadeIn(500);
+  video.trigger('play');
+}
+
+function stopVideo(video = $('.video-table')) {
+  video.trigger('end');
+  video.fadeOut(500);
 }
 
 $(document).ready(event => {
@@ -67,5 +87,6 @@ $(document).ready(event => {
   getWeather();
   let fetchTimer1 = window.setInterval(fetchContext, 1000);
   let fetchTimer2 = window.setInterval(getWeather, 300000);
+  let fetchTimer3 = window.setInterval(getHealthInfo, 1000);
 });
-$(document).ready(voice_assistant('祝你天天有个好心情'));
+$(document).ready(voice_assistant('杭州师范大学110周年校庆,感谢有你'));
