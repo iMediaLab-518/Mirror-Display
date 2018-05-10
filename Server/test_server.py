@@ -43,5 +43,13 @@ def face():
         return 'ERR'
     return out
 
+@app.route('/voice')
+def voice():
+    try:
+        out=os.popen('python3 voice/baidu/try.py').read()
+    except Exception:
+        return 'ERR'
+    return out
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=12345,debug=True)
