@@ -38,7 +38,7 @@ def humidity():
 @app.route('/face')
 def face():
     try:
-        out=os.popen('python3 face.py').read()
+        out=os.popen('python3 Mirror-Face-Recognition/face_recognition.py').read()
     except Exception:
         return 'ERR'
     return out
