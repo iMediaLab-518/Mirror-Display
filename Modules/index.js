@@ -41,13 +41,13 @@ function getWeather(city = 'hangzhou') {
 }
 
 function voice_assistant(strInput = '') {
-  $('#assistant-element').fadeIn(1000);
+  //$('#assistant-element').fadeIn(1000);
   $('#assistant-element').text('');
   let count = 0;
   let timer = setInterval(event => {
     if (count >= strInput.length) {
       clearInterval(timer);
-      $('#assistant-element').fadeOut(1000);
+      //$('#assistant-element').fadeOut(1000);
     } else {
       //icon_breath();
       $('#assistant-element').text($('#assistant-element').text() + strInput[count]);
@@ -77,7 +77,7 @@ function getHealthInfo(GATE = '') {
 }
 
 function getVoiceInfo(GATE = 'voice') {
-  voice_assistant('请输入语音指令');
+  //voice_assistant('请输入语音指令');
   let API = 'http://127.0.0.1:12345/' + GATE;
   //console.log(API);
   $.ajax({
@@ -93,6 +93,28 @@ function getVoiceInfo(GATE = 'voice') {
       console.log(voice);
       $('#health-2').text(voice);
       $('.healthreport-table').fadeTo(500, 0.8);
+      if (voice == '开始')
+        getFaceLogin();
+    }
+  });
+}
+
+function getFaceLogin(GATE = 'face') {
+  voice_assistant('请将面部对准摄像头');
+  let API = 'http://127.0.0.1:12345/' + GATE;
+  //console.log(API);
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    url: API,
+    dataType: 'jsonp',
+    crossDomain: true,
+    jsonp: 'callback',
+    jsonpCallback: 'successCallback',
+    success: (data) => {
+      let user = data.user;
+      console.log(user);
+      voice_assistant('你好，' + user + ',祝您生活愉快');
     }
   });
 }
@@ -118,6 +140,7 @@ $(document).ready(event => {
   getWeather();
   playVideo();
   stopVideo();
+  voice_assistant('请输入语音指令');
   let fetchTimer1 = window.setInterval(fetchContext, 1000);
   let fetchTimer2 = window.setInterval(getWeather, 300000);
   let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 30000);
