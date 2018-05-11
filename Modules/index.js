@@ -76,6 +76,26 @@ function getHealthInfo(GATE = '') {
   });
 }
 
+function getVoiceInfo(GATE = 'voice') {
+  voice_assistant('请输入语音指令');
+  let API = 'http://127.0.0.1:12345/' + GATE;
+  //console.log(API);
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    url: API,
+    dataType: 'jsonp',
+    crossDomain: true,
+    jsonp: 'callback',
+    jsonpCallback: 'successCallback',
+    success: (data) => {
+      let health = data.res;
+      //console.log(health);
+      $('#health-2').text(health);
+    }
+  });
+}
+
 function playVideo(video = $('.video-table')) {
   video.fadeIn(500);
   video.trigger('play');
@@ -93,5 +113,6 @@ $(document).ready(event => {
   let fetchTimer1 = window.setInterval(fetchContext, 1000);
   let fetchTimer2 = window.setInterval(getWeather, 300000);
   let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 1000);
-  let fetchTimer4 = window.setInterval('voice_assistant("智能健康魔镜项目演示")', 5000);
+  //let fetchTimer4 = window.setInterval('voice_assistant("智能健康魔镜项目演示")', 5000);
+  let fetchTimer5 = window.setInterval(getVoiceInfo, 3000);
 });
