@@ -89,31 +89,38 @@ function getVoiceInfo(GATE = 'voice') {
     jsonp: 'callback',
     jsonpCallback: 'successCallback',
     success: (data) => {
-      let health = data.res;
-      let voice = unescape(health.replace(/\\u/g, '%u'));
+      let voice = data.res;
       console.log(voice);
       $('#health-2').text(voice);
+      $('.healthreport-table').fadeTo(500, 0.8);
     }
   });
 }
 
-function playVideo(video = $('.video-table')) {
-  video.fadeIn(500);
-  video.trigger('play');
+function playVideo(video = $('#video1')) {
+  video.click(() => {
+    video.fadeTo(500, 1);
+    video.trigger('play');
+  });
 }
 
-function stopVideo(video = $('.video-table')) {
-  video.trigger('end');
-  video.fadeOut(500);
+function stopVideo(video = $('#video1')) {
+  video.dblclick(() => {
+    video.fadeTo(500, 0);
+    video.trigger('pause');
+  });
 }
 
 $(document).ready(event => {
   $('.healthreport-table').fadeTo(0, 0);
+  $('#video1').fadeTo(0, 0);
   fetchContext();
   getWeather();
+  playVideo();
+  stopVideo();
   let fetchTimer1 = window.setInterval(fetchContext, 1000);
   let fetchTimer2 = window.setInterval(getWeather, 300000);
-  let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 1000);
+  let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 30000);
   //let fetchTimer4 = window.setInterval('voice_assistant("智能健康魔镜项目演示")', 5000);
   let fetchTimer5 = window.setInterval(getVoiceInfo, 3000);
 });

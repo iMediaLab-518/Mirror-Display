@@ -1,6 +1,7 @@
 #!/bin/env python
-# _*_coding:utf-8_*_
+# encoding: utf-8
 import os
+import sys
 from flask import Flask, json
 from flask import request
 
@@ -14,10 +15,14 @@ def index():
 @app.route('/test', methods=['GET'])
 def test():
     try:
-        out=os.popen('python3 test.py').read()
+        out=os.popen('python3 test.py').read()  
+        if isinstance(out, bytes):
+            res=str(out, encoding='utf-8')
+        else:
+            res=out
     except Exception:
         return 'ERR'
-    return 'successCallback'+'('+json.dumps({'out':out}) +')'
+    return 'successCallback'+'('+json.dumps({'res':res}) +')'
 
 @app.route('/temperature')
 def temperature():
@@ -46,7 +51,11 @@ def face():
 @app.route('/voice')
 def voice():
     try:
-        res=os.popen('python3 voice/baidu/try.py').read()
+        out=os.popen('python3 voice/baidu/try.py').read()
+        if isinstance(out, bytes):
+            res=str(out, encoding='utf-8')
+        else:
+            res=out
     except Exception:
         return 'ERR'
     return 'successCallback'+'('+json.dumps({'res':res}) +')'
