@@ -92,6 +92,6 @@ $(document).ready(event => {
   getWeather();
   let fetchTimer1 = window.setInterval(fetchContext, 1000);
   let fetchTimer2 = window.setInterval(getWeather, 300000);
-  let fetchTimer3 = window.setInterval('getHealthInfo("test")', 1000);
+  let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 1000);
   let fetchTimer4 = window.setInterval('voice_assistant("智能健康魔镜项目演示")', 5000);
 });
