@@ -41,6 +41,7 @@ function getWeather(city = 'hangzhou') {
 }
 
 function voice_assistant(strInput = '') {
+  $('#assistant-element').fadeIn(1000);
   $('#assistant-element').text('');
   let count = 0;
   let timer = setInterval(event => {
@@ -56,17 +57,20 @@ function voice_assistant(strInput = '') {
 }
 
 function getHealthInfo(GATE = '') {
-  let API = '127.0.0.1:' + GATE;
+  let API = 'http://127.0.0.1:12345/' + GATE;
+  //console.log(API);
   $.ajax({
     type: 'GET',
-    async: false,
     cache: false,
-    url: url,
-    dataType: 'json',
+    url: API,
+    dataType: 'jsonp',
+    crossDomain: true,
+    jsonp: 'callback',
+    jsonpCallback: 'successCallback',
     success: (data) => {
-      let health = data;
-      console.log(health);
-      $('#health-1').text();
+      let health = data.out;
+      //console.log(health);
+      $('#health-1').text(health);
       $('.healthreport-table').fadeTo(500, 0.8);
     }
   });
@@ -83,10 +87,11 @@ function stopVideo(video = $('.video-table')) {
 }
 
 $(document).ready(event => {
+  $('.healthreport-table').fadeTo(0, 0);
   fetchContext();
   getWeather();
   let fetchTimer1 = window.setInterval(fetchContext, 1000);
   let fetchTimer2 = window.setInterval(getWeather, 300000);
-  let fetchTimer3 = window.setInterval(getHealthInfo, 1000);
+  let fetchTimer3 = window.setInterval('getHealthInfo("test")', 1000);
+  let fetchTimer4 = window.setInterval('voice_assistant("智能健康魔镜项目演示")', 5000);
 });
-$(document).ready(voice_assistant('杭州师范大学110周年校庆,感谢有你'));
