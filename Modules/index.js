@@ -90,8 +90,9 @@ function getVoiceInfo(GATE = 'voice') {
     jsonpCallback: 'successCallback',
     success: (data) => {
       let health = data.res;
-      console.log(health);
-      $('#health-2').text(health);
+      let voice = unescape(str.replace(/\\u/g, '%u'));
+      console.log(voice);
+      $('#health-2').text(voice);
     }
   });
 }
