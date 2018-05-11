@@ -69,7 +69,7 @@ function getHealthInfo(GATE = '') {
     jsonpCallback: 'successCallback',
     success: (data) => {
       let health = data.out;
-      //console.log(health);
+      console.log(health);
       $('#health-1').text(health);
       $('.healthreport-table').fadeTo(500, 0.8);
     }
@@ -90,7 +90,7 @@ function getVoiceInfo(GATE = 'voice') {
     jsonpCallback: 'successCallback',
     success: (data) => {
       let health = data.res;
-      //console.log(health);
+      console.log(health);
       $('#health-2').text(health);
     }
   });
