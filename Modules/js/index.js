@@ -8,6 +8,7 @@
 /* jshint esversion: 6 */
 
 let hintwords = '';
+//let w;
 
 function fetchContext() {
   let time = moment().format('HH:mm');
@@ -75,10 +76,23 @@ function getHealthInfo(GATE = '') {
     success: (data) => {
       let health = data.out;
       console.log(health);
-      $('#health-1').text(health);
+      if (health != '')
+        $('#health-1').text(health);
       $('.healthreport-table').fadeTo(500, 0.8);
     }
   });
+  // if (typeof (Worker) !== "undefined") {
+  //   if (typeof (w) == "undefined") {
+  //     w = new Worker("Modules/js/web_workers/test_workers.js");
+  //   }
+  //   w.onmessage =  (event) => {
+  //     console.log(event.data);
+  //     voice_assistant(event.data);
+  //     $('.healthreport-table').fadeTo(500, 0.8);
+  //   };
+  // } else {
+  //   console.log('Sorry, your browser does not support Web Workers...');
+  // }
 }
 
 function getVoiceInfo(GATE = 'voice') {
@@ -119,7 +133,7 @@ function getFaceLogin(GATE = 'face') {
     success: (data) => {
       let user = data.user;
       console.log(user);
-      for (let i = 0; i < user.length; i++) {
+      for (let i = 0, len = user.length; i < len; i++) {
         if (user[i] != '' && user[i] != 'ERR' && user[i] != 'unknown' && user[i].indexOf('INFO')) {
           voice_assistant('你好，' + user[i] + ',欢迎使用智能健康魔镜');
         } else {
