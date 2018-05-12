@@ -42,8 +42,15 @@ def humidity():
 
 @app.route('/face')
 def face():
+    user=''
     try:
-        user=os.popen('python3 Mirror-Face-Recognition/face_recognition.py').read()
+        res=os.popen('python3 Mirror-Face-Recognition/face_recognition.py').readlines()
+        if len(res):
+            for i in res:
+                user=res.index(i)
+                print(user)
+        else:
+            user=''
     except Exception:
         return 'ERR'
     return 'successCallback'+'('+json.dumps({'user':user}) +')'
