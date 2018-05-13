@@ -2,8 +2,8 @@
 # encoding: utf-8
 import os
 import sys
-from flask import Flask, json
-from flask import request
+from flask import (Flask, json, request, make_response)
+from core import *
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ def index():
     return '<h1><p>欢迎访问魔镜后台服务</p></h1>'
 
 
-@app.route('/test', methods=['GET'])
+@app.route('/test', methods=['GET', 'POST'])
 def test():
     try:
         out=os.popen('python3 test.py').read()  
@@ -22,25 +22,25 @@ def test():
             res=out
     except Exception:
         return 'ERR'
-    return 'successCallback'+'('+json.dumps({'res':res}) +')'
+    return makeResponse('res', res)
 
-@app.route('/temperature')
+@app.route('/temperature', methods=['GET', 'POST'])
 def temperature():
     try:
         out=os.popen('python3 getTemperature.py').read()
     except Exception:
         return 'ERR'
-    return 'successCallback'+'('+json.dumps({'out':out}) +')'
+    return makeResponse('out', out)
 
-@app.route('/humidity')
+@app.route('/humidity', methods=['GET', 'POST'])
 def humidity():
     try:
         out=os.popen('python3 getHumidity.py').read()
     except Exception:
         return 'ERR'
-    return 'successCallback'+'('+json.dumps({'out':out}) +')'
+    return makeResponse('out', out)
 
-@app.route('/face')
+@app.route('/face', methods=['GET', 'POST'])
 def face():
     user=''
     try:
@@ -48,14 +48,14 @@ def face():
         if len(res):
             for i in res:
                 user=res.index(i)
-                print(user)
+                print(''+user)
         else:
             user=''
     except Exception:
         return 'ERR'
-    return 'successCallback'+'('+json.dumps({'user':user}) +')'
+    return makeResponse('user', user)
 
-@app.route('/voice')
+@app.route('/voice', methods=['GET', 'POST'])
 def voice():
     try:
         out=os.popen('python3 voice/baidu/try.py').read()
@@ -65,7 +65,7 @@ def voice():
             res=out
     except Exception:
         return 'ERR'
-    return 'successCallback'+'('+json.dumps({'res':res}) +')'
+    return makeResponse('res', res)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=12345,debug=True)
+    app.run(host='0.0.0.0', port=12345, threaded=True, debug=True)

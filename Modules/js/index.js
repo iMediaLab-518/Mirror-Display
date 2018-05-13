@@ -1,8 +1,8 @@
 /**
  * 
  * @authors Wang Hanze
- * @date    2018-05-13 01:46:45
- * @version 1.8.0
+ * @date    2018-05-13 14:22:20
+ * @version 1.8.1
  */
 
 /* jshint esversion: 6 */
@@ -21,6 +21,21 @@ function fetchContext() {
   $('#week-element').text(week);
 }
 
+function test(GATE = 'test') {
+  let API = 'http://127.0.0.1:12345/' + GATE;
+  //console.log(API);
+  $.ajax({
+    type: 'POST',
+    async: true,
+    url: API,
+    dataType: 'json',
+    success: (data) => {
+      let test_info = data.res;
+      console.log(test_info);
+    }
+  });
+}
+
 function getWeather(city = 'hangzhou') {
   let KEY = '5d406a7cf41246108dd72c0986759cbd';
   let API = 'https://free-api.heweather.com/s6/weather';
@@ -29,7 +44,7 @@ function getWeather(city = 'hangzhou') {
   //console.log(url);
   $.ajax({
     type: 'GET',
-    async: false,
+    async: true,
     cache: false,
     url: url,
     dataType: 'json',
@@ -66,13 +81,10 @@ function getHealthInfo(GATE = '') {
   let API = 'http://127.0.0.1:12345/' + GATE;
   //console.log(API);
   $.ajax({
-    type: 'GET',
-    cache: false,
+    type: 'POST',
+    async: true,
     url: API,
-    dataType: 'jsonp',
-    crossDomain: true,
-    jsonp: 'callback',
-    jsonpCallback: 'successCallback',
+    dataType: 'json',
     success: (data) => {
       let health = data.out;
       console.log(health);
@@ -100,13 +112,10 @@ function getVoiceInfo(GATE = 'voice') {
   let API = 'http://127.0.0.1:12345/' + GATE;
   //console.log(API);
   $.ajax({
-    type: 'GET',
-    cache: false,
+    type: 'POST',
+    async: true,
     url: API,
-    dataType: 'jsonp',
-    crossDomain: true,
-    jsonp: 'callback',
-    jsonpCallback: 'successCallback',
+    dataType: 'json',
     success: (data) => {
       let voice = data.res;
       console.log(voice);
@@ -123,23 +132,25 @@ function getFaceLogin(GATE = 'face') {
   let API = 'http://127.0.0.1:12345/' + GATE;
   //console.log(API);
   $.ajax({
-    type: 'GET',
-    cache: false,
+    type: 'POST',
+    async: true,
     url: API,
-    dataType: 'jsonp',
-    crossDomain: true,
-    jsonp: 'callback',
-    jsonpCallback: 'successCallback',
+    dataType: 'json',
     success: (data) => {
       let user = data.user;
       console.log(user);
       for (let i = 0, len = user.length; i < len; i++) {
         if (user[i] != '' && user[i] != 'ERR' && user[i] != 'unknown' && user[i].indexOf('INFO')) {
           voice_assistant('你好，' + user[i] + ',欢迎使用智能健康魔镜');
+        } else if (user[i] != '' && user[i] != 'ERR' && user[i] == 'unknown') {
+          voice_assistant('用户未认证');
         } else {
           voice_assistant('对不起，没有识别到认证用户');
         }
       }
+    },
+    error: (e) => {
+      voice_assistant('没有识别到人脸');
     }
   });
 }
@@ -165,10 +176,11 @@ function startVoice() {
 }
 
 $(document).ready(event => {
-  //voice_assistant('初始化...');
   $('.healthreport-table').fadeTo(0, 0);
   $('#video1').fadeTo(0, 0);
+
   fetchContext();
+  test();
   getWeather();
   getHealthInfo('temperature');
 
