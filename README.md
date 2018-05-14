@@ -1,4 +1,5 @@
 # 系统整体架构
+
 Mirror-Display/
 |
 +- .vscode/
@@ -39,8 +40,6 @@ Mirror-Display/
 |
 +- Server/
 |  |
-|  +- __pycache__/
-|  |
 |  +- Mirror-Face-Recognition/
 |  |
 |  +- voice/
@@ -60,4 +59,5 @@ Mirror-Display/
 +- weather-example.json <-- 天气信息 JSON 样例
 
 # 健康魔镜主屏显示 DEMO
+
 ![魔镜主屏设计](demo.png)
