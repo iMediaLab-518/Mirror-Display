@@ -1,8 +1,10 @@
 # 系统整体架构
 
 Mirror-Display/
+
 |
 +- .vscode/
+
 |  |
 |  +- setting.json <-- VSCode 配置文件
 |
@@ -57,6 +59,7 @@ Mirror-Display/
 +- index.html <-- 主要显示界面
 |
 +- weather-example.json <-- 天气信息 JSON 样例
+
 
 # 健康魔镜主屏显示 DEMO
 
