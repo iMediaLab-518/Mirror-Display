@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="icon-table col-md-3">
-                <img class="icon-weather" src="Resource/icon-example.png">
+                <img id="weather-icon" class="icon-weather" src="Resource/icon-example.png">
             </div>
             <div class="info-table col-md-3">
                 <div class="row">
@@ -71,12 +71,12 @@
                         </strong>
                     </div>
                     <div class="tempnum col-md-12">
-                        <span>Tmp:</span>
+                        <span>温度:</span>
                         <span id="temp-element">N/A</span>
                         <span>℃</span>
                     </div>
                     <div class="humiditynum col-md-12">
-                        <span>Hum:</span>
+                        <span>湿度:</span>
                         <span id="humidity-element">N/A</span>
                         <span>%</span>
                     </div>
@@ -88,10 +88,12 @@
 
 <script type="text/javascript" src="Modules/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="Modules/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Modules/js/echarts.min.js"></script>
 <script type="text/javascript" src="Modules/js/moment.min.js"></script>
 <script type="text/javascript" src="Modules/js/crypto-js.js"></script>
 <script type="text/javascript" src="Modules/js/hmac-sha1.js"></script>
 <script type="text/javascript" src="Modules/js/index.js"></script>
+
 </body>
 
 </html>

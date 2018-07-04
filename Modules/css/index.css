@@ -90,7 +90,9 @@ h3 {
         opacity: 0;
     }
 }
-
+#weather-element{
+    font-size: 1.5em;
+}
 .info-table {
     margin-top: 20px;
 }
@@ -104,7 +106,7 @@ h3 {
 }
 
 #second-element {
-    font-size: 2.5em;
+    font-size: 3.5em;
 }
 
 .dayinfo {

@@ -5,13 +5,12 @@
  * @version 1.8.1
  */
 
-/* jshint esversion: 6 */
-
-let hintwords = '';
+ /* jshint esversion: 6 */
 
 //let w;
 
-function fetchContext() {
+function fetchContext() {//右下角 日期时间的获取
+
     let time = moment().format('HH:mm');
     let second = moment().format(':ss');
     let date = moment().format('YYYY-MM-DD');
@@ -23,12 +22,13 @@ function fetchContext() {
 }
 
 function test(GATE = 'test') {
+
     let API = 'http://127.0.0.1:12345/' + GATE;
     //console.log(API);
     $.ajax({
         type: 'POST',
         async: true,
-        url: API,
+        url: API,  
         dataType: 'json',
         success: (data) => {
             let test_info = data.res;
@@ -37,34 +37,54 @@ function test(GATE = 'test') {
     });
 }
 
-function getWeather(city = 'hangzhou') {
-    let KEY = '5d406a7cf41246108dd72c0986759cbd';
-    let API = 'https://free-api.heweather.com/s6/weather';
-    let LOCATION = city;
-    let url = API + '?location=' + LOCATION + '&key=' + KEY + '&' + 'lang=en' + '&' + 'unit=m';
-    //console.log(url);
-    $.ajax({
-        type: 'GET',
+function getWeather() {//本地实时天气
+
+    //百度普通id定位的服务接口
+    let bd_KEY = 'c2niE7ExcK2izOZ0RWHxShaVVCuPzXvx';
+    let city = '';
+    $.get("https://api.map.baidu.com/location/ip?ak="+bd_KEY,function(res){
+        city = res.content.address_detail.city;
+        //删除“市”字
+        if(city.indexOf("市")!=-1){
+            city = city.substring(0,city.indexOf("市"));
+        }
+
+        let KEY = '5d406a7cf41246108dd72c0986759cbd';
+        let API = 'https://free-api.heweather.com/s6/weather';
+        let LOCATION = city;
+        let url = API + '?location=' + LOCATION + '&key=' + KEY + '&' + 'lang=en' + '&' + 'unit=m';
+       
+        $.ajax({
+        type: 'POST',
+        data:{lang:'cn'},
         async: true,
         cache: false,
         url: url,
         dataType: 'json',
         success: (data) => {
-            let weather = data.HeWeather6[0];
-            console.log(weather);
-            $('#weather-element').text(weather.now.cond_txt);
-            $('#temp-element').text(weather.now.tmp);
-            $('#humidity-element').text(weather.now.hum);
-        }
-    });
+            let weather = data.HeWeather6[0].now;
+            $('#weather-element').text(weather.cond_txt);
+            $('#temp-element').text(weather.tmp);
+            $('#humidity-element').text(weather.hum);
+
+            let weather_code = weather.cond_code;
+            $("#weather-icon").attr("src","Resource/weather-icon/"+ weather_code +".png");
+
+         }
+        });        
+
+    }  ,'jsonp');
+
 }
 
 function voice_assistant(strInput = '') {
-    hintwords = '';
-    hintwords = strInput;
+    let hintwords = strInput;
     console.log(hintwords);
     //$('#assistant-element').fadeIn(1000);
+
+    //逐字显示欢迎语
     $('#assistant-element').text('');
+
     let count = 0;
     let timer = setInterval(event => {
         if (count >= hintwords.length) {
