@@ -11,9 +11,10 @@ body {
     padding: 0;
     width: 1080px;
     height: 1920px;
+    background: #000000;
 }
 
-.screen {
+.screen {   
     margin: 0;
     padding: 0;
     width: 1080px;
@@ -24,23 +25,9 @@ body {
     color: #ffffff;
 }
 
-.row {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .information-table {
     position: absolute;
     bottom: 10px;
-}
-
-.healthreport-table {
-    position: absolute;
-    top: 200px;
-    left: 50px;
-    /* animation: 3s location_trans 0s infinite; */
 }
 
 h3 {
@@ -51,25 +38,40 @@ h3 {
     font-size: 1.5em;
 }
 
-.video-table {
-    position: absolute;
-    top: 500px;
-}
-
 .icon-weather {
-    width: 150px;
+    width: 150px
     height: 150px;
     margin-top: 70px;
     margin-left: 120px;
 }
 
 .assistant-table {
+    margin-bottom: 20px;
+    padding: 10px;
     font-size: 2.5em;
 }
+.video-table{
+    margin-top: 20px;
+}
 
+.charts-box{
+    width: 630px;
+    height: 600px;
+}
+#weightCurveChart{
+    width: 90%;
+    height: 250px;
+    display: inline-block;
+}
+#compositionPieChart{
+    width: 80%;
+    height: 300px;  
+    display: inline-block;
+}
 .circle {
-    margin-top: 17.5px;
-    margin-bottom: 17.5px;
+    display: inline-block;
+   /* margin-top: 17.5px;
+    margin-bottom: 17.5px;*/
     margin-right: 10px;
     width: 25px;
     height: 25px;
@@ -134,4 +136,7 @@ h3 {
 
 .padding-10px {
     padding: 10px;
+}
+.margin-20px{
+    margin: 20px;
 }

@@ -196,18 +196,106 @@ function startVoice() {
     });
 }
 
+function draw_WeightCurve_Chart(){
+    let chart = echarts.init(document.getElementById("weightCurveChart"));
+    let option = {
+        title:{
+            text:"体重变化曲线",
+            left:'center',
+            textStyle:{
+                color:"#ffffff",
+                fontSize : '20px'
+            }
+        },
+        textStyle:{
+            color:'#ffffff'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July']            
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [45, 44, 46, 47, 46, 45, 44],
+            type: 'line',
+            smooth: true
+        }]
+    };
+    chart.setOption(option);
+}
+
+function draw_CompositionPie_Chart(){
+
+    let chart = echarts.init(document.getElementById("compositionPieChart"));
+    let option = {
+    title : {
+        text: '身体成分图',
+        x:'center',
+        textStyle:{
+            color:'#ffffff'
+        }
+    },
+    textStyle:{
+        color:"#ffffff"
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient:'vertical',
+        x : '50px',
+        y : '100px',
+        data:['水分','肌肉','骨量','脂肪','其他']
+    },
+   
+    calculable : true,
+    series : [
+        {
+            name:'',
+            type:'pie',
+            radius : [20, 100],
+            center : ['60%', '50%'],//圆心xy的位置
+            roseType : 'area',
+            data:[
+                {value:30, name:'水分'},
+                {value:20, name:'肌肉'},
+                {value:18, name:'骨量'},
+                {value:22, name:'脂肪'},
+                {value:10,name:'其他'}
+            ]
+        }
+    ]
+};
+
+    chart.setOption(option);
+
+}
+
+
 $(document).ready(event => {
-    $('.healthreport-table').fadeTo(0, 0);
-    $('#video1').fadeTo(0, 0);
+
+    $(".carousel").carousel('cycle');
+    // let carouselID = setInterval(() => {
+    //   $(".carousel").carousel('next');
+    // }, 1000);
+    // $('.healthreport-table').fadeTo(0, 0);
+    // $('#video1').fadeTo(0, 0);
 
     fetchContext();
-    test();
+    // test();
     getWeather();
-    getHealthInfo('temperature');
+    // getHealthInfo('temperature');
 
-    playVideo();
-    stopVideo();
-    startVoice();
+    // playVideo();
+    // stopVideo();
+    // startVoice();
+
+    draw_WeightCurve_Chart();
+    draw_CompositionPie_Chart();
+
 
     let fetchTimer1 = window.setInterval(fetchContext, 1000);
     let fetchTimer2 = window.setInterval(getWeather, 300000);
