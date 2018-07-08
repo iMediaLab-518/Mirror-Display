@@ -11,7 +11,7 @@ body {
     padding: 0;
     width: 1080px;
     height: 1920px;
-    background: #000000;
+    /*background: #000000;*/
 }
 
 .screen {   
@@ -139,4 +139,7 @@ h3 {
 }
 .margin-20px{
     margin: 20px;
+}
+#voiceReader{
+    display: none;
 }

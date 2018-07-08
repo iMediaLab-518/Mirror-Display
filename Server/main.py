@@ -72,6 +72,13 @@ def voice():
         return 'ERR'
     return makeResponse('res', res)
 
+@app.route('/getToken',methods=['GET','POST'])
+def getToken():
+    try:
+        out = os.popen('python3 Server/getToken.py').read()
+    except Exception:
+        return 'ERR'
+    return makeResponse('token',out)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=12345, threaded=True, debug=True)

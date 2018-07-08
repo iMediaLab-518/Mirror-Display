@@ -1,6 +1,6 @@
 /**
  *
- * @authors Wang Hanze
+ * @authors Wang Hanze & Wang Ping
  * @date    2018-05-13 14:22:20
  * @version 1.8.1
  */
@@ -53,24 +53,24 @@ function getWeather() {//本地实时天气
         let API = 'https://free-api.heweather.com/s6/weather';
         let LOCATION = city;
         let url = API + '?location=' + LOCATION + '&key=' + KEY + '&' + 'lang=en' + '&' + 'unit=m';
-       
+
         $.ajax({
-        type: 'POST',
-        data:{lang:'cn'},
-        async: true,
-        cache: false,
-        url: url,
-        dataType: 'json',
-        success: (data) => {
-            let weather = data.HeWeather6[0].now;
-            $('#weather-element').text(weather.cond_txt);
-            $('#temp-element').text(weather.tmp);
-            $('#humidity-element').text(weather.hum);
+            type: 'POST',
+            data:{lang:'cn'},
+            async: true,
+            cache: false,
+            url: url,
+            dataType: 'json',
+            success: (data) => {
+                let weather = data.HeWeather6[0].now;
+                $('#weather-element').text(weather.cond_txt);
+                $('#temp-element').text(weather.tmp);
+                $('#humidity-element').text(weather.hum);
 
-            let weather_code = weather.cond_code;
-            $("#weather-icon").attr("src","Resource/weather-icon/"+ weather_code +".png");
+                let weather_code = weather.cond_code;
+                $("#weather-icon").attr("src","Resource/weather-icon/"+ weather_code +".png");
 
-         }
+            }
         });        
 
     }  ,'jsonp');
@@ -230,50 +230,88 @@ function draw_CompositionPie_Chart(){
 
     let chart = echarts.init(document.getElementById("compositionPieChart"));
     let option = {
-    title : {
-        text: '身体成分图',
-        x:'center',
+        title : {
+            text: '身体成分图',
+            x:'center',
+            textStyle:{
+                color:'#ffffff'
+            }
+        },
         textStyle:{
-            color:'#ffffff'
-        }
-    },
-    textStyle:{
-        color:"#ffffff"
-    },
-    tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        orient:'vertical',
-        x : '50px',
-        y : '100px',
-        data:['水分','肌肉','骨量','脂肪','其他']
-    },
-   
-    calculable : true,
-    series : [
+            color:"#ffffff"
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient:'vertical',
+            x : '50px',
+            y : '100px',
+            data:['水分','肌肉','骨量','脂肪','其他']
+        },
+
+        calculable : true,
+        series : [
         {
             name:'',
             type:'pie',
             radius : [20, 100],
-            center : ['60%', '50%'],//圆心xy的位置
-            roseType : 'area',
-            data:[
+                center : ['60%', '50%'],//圆心xy的位置
+                roseType : 'area',
+                data:[
                 {value:30, name:'水分'},
                 {value:20, name:'肌肉'},
                 {value:18, name:'骨量'},
                 {value:22, name:'脂肪'},
                 {value:10,name:'其他'}
+                ]
+            }
             ]
-        }
-    ]
-};
+        };
 
     chart.setOption(option);
-
 }
 
+function readMessage(msg){
+    /*
+        必填项
+        tex 合成的文本，使用UTF-8编码
+        tok 开放平台获取到的开发者access_token（见上面的“鉴权认证机制”段落）
+        cuid 用户唯一标识，用来区分用户，计算UV值。建议填写能区分用户的机器 MAC 地址或 IMEI 码，长度为60字符以内
+        ctp 客户端类型选择，web端填写固定值1
+        lan 固定值zh。语言选择,目前只有中英文混合模式，填写固定值zh
+
+        选填项
+        spd 语速，取值0-15，默认为5中语速
+        pit 音调，取值0-15，默认为5中语调
+        vol 音量，取值0-9，默认为5中音量
+        per 发音人选择, 0为普通女声，1为普通男生，3为情感合成-度逍遥，4为情感合成-度丫丫，默认为普通女声
+        */  
+
+    $.post("http://127.0.0.1:12345/getToken",function(data){
+        //从服务端获取百度云access_token
+        let token = data.token;
+        console.log(token);
+
+        let API = "https://tsn.baidu.com/text2audio?tex=%e7%99%be%e5%ba%a6%e4%bd%a0%e5%a5%bd&lan=zh&cuid=123456&ctp=1&tok="+token;
+
+        $.ajax({        
+            type:'GET',
+            async: true,
+            url:API,    
+            success:function(data,status,xhr){
+                $("#voiceReader").attr('src',API);
+                //$("#voiceReader")[0].load();
+                //$("#voiceReader")[0].play();
+                console.log(API);
+            }
+        
+        });        
+    },'json');
+
+
+}
 
 $(document).ready(event => {
 
@@ -296,10 +334,11 @@ $(document).ready(event => {
     draw_WeightCurve_Chart();
     draw_CompositionPie_Chart();
 
+    readMessage();
 
     let fetchTimer1 = window.setInterval(fetchContext, 1000);
     let fetchTimer2 = window.setInterval(getWeather, 300000);
-    let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 30000);
+    // let fetchTimer3 = window.setInterval('getHealthInfo("temperature")', 30000);
     voice_assistant('祝您新的一天生活愉快');
     //let fetchTimer4 = window.setInterval('voice_assistant("智能健康魔镜项目演示")', 5000);
     //let fetchTimer5 = window.setInterval(getVoiceInfo, 3000);
