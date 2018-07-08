@@ -60,6 +60,6 @@ Mirror-Display/
 
 
 
-# 健康魔镜主屏显示 DEMO
+# 健康魔镜主屏
 
-![魔镜主屏设计](demo.png)
+![魔镜主屏当前设计](design.png)
