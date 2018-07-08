@@ -1,8 +1,8 @@
 /**
  *
  * @authors Wang Hanze & Wang Ping
- * @date    2018-05-13 14:22:20
- * @version 1.8.1
+ * @date    2018-07-08 18:10:00
+ * @version 1.8.5
  */
 
  /* jshint esversion: 6 */
@@ -72,8 +72,7 @@ function getWeather() {//本地实时天气
 
             }
         });        
-
-    }  ,'jsonp');
+    },'jsonp');
 
 }
 
@@ -270,8 +269,8 @@ function draw_CompositionPie_Chart(){
             ]
         };
 
-    chart.setOption(option);
-}
+        chart.setOption(option);
+    }
 
 function readMessage(msg){
     /*
@@ -305,12 +304,9 @@ function readMessage(msg){
                 //$("#voiceReader")[0].load();
                 //$("#voiceReader")[0].play();
                 console.log(API);
-            }
-        
+            }   
         });        
     },'json');
-
-
 }
 
 $(document).ready(event => {
