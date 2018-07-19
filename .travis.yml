@@ -1,0 +1,20 @@
+os: "linux"
+sudo: enabled
+language: python
+python:
+    - "3.6"
+before_install:
+	- git config --global user.name "王含泽"
+	- git config --global user.email "whzcorcd@gmail.com"
+
+addons:
+	ssh_known_hosts: s1.natfrp.org:4065
+
+# command to install dependencies
+install:
+    - pip install
+# command to run tests
+script:
+after_success:
+	- ssh -p 4065 pi@s1.natfrp.org 'cd Public/Mirror-Display && git pull -b dev_whz https://github.com/iMediaLab-518/Mirror-Display.git
+'
