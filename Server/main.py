@@ -1,9 +1,14 @@
-#!/bin/env python
-# encoding: utf-8
+from importlib import import_module
 import os
 import sys
-from flask import (Flask, json, request, make_response)
-from core import *
+from flask import (Flask, json, request, make_response, render_template,
+                   Response)
+# import camera driver
+if os.environ.get('CAMERA'):
+    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
+else:
+    #uncomment below to use Raspberry Pi camera instead
+    from cam import Camera
 
 app = Flask(__name__)
 
@@ -48,7 +53,8 @@ def humidity():
 def face():
     user = ''
     try:
-        res = os.popen('python3 Mirror-Face-Recognition/face_recognition.py').readlines()
+        res = os.popen(
+            'python3 Mirror-Face-Recognition/face_recognition.py').readlines()
         if len(res):
             for i in res:
                 user = res.index(i)
@@ -71,6 +77,20 @@ def voice():
     except Exception:
         return 'ERR'
     return makeResponse('res', res)
+
+
+@app.route('/camera', methods=['GET', 'POST'])
+def cam():
+    return Response(
+        gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+def gen(camera):
+    """Video streaming generator function."""
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
 if __name__ == '__main__':

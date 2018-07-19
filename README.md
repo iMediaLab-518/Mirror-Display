@@ -14,6 +14,8 @@ Mirror-Display/
 | | +- bootstrap.min.css.map
 | | |
 | | +- index.css <-- 页面样式
+| | |
+| | +- login.css <-- Live 页样式
 | |
 | +- js/
 | | |
@@ -54,6 +56,8 @@ Mirror-Display/
 | +- getHumidity.py
 |
 +- index.html <-- 主要显示界面
+|
++- login.html <-- 人脸登录界面
 |
 +- weather-example.json <-- 天气信息 JSON 样例
 ```
