@@ -87,8 +87,8 @@ def voice():
     return makeResponse('res', res)
 
 
-@app.route('/camera', methods=['GET', 'POST'])
-def cam():
+@app.route('/camera')
+def camera():
     return Response(
         gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
