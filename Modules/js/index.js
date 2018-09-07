@@ -1,8 +1,8 @@
 /**
  *
  * @authors Wang Hanze & Wang Ping
- * @date    2018-07-08 18:10:00
- * @version 1.8.5
+ * @date    2018-09-07 12:34:00
+ * @version 1.8.6
  */
 
  /* jshint esversion: 6 */
@@ -68,7 +68,7 @@ function getWeather() {//本地实时天气
                 $('#humidity-element').text(weather.hum);
 
                 let weather_code = weather.cond_code;
-                $("#weather-icon").attr("src","Resource/weather-icon/"+ weather_code +".png");
+                $("#weather-icon").attr("src","../../Resource/weather-icon/"+ weather_code +".png");
 
             }
         });        
