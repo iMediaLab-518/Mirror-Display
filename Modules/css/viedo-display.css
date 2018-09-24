@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 1080px;
+	height: 1920px;
+	background: #000000;
+	color: white;
+	
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+/*心率提示*/
+.heart-rate-prompt{
+	position: relative;
+	top:10%;
+}
+.current-heart-rate{
+	font-size:3em ;
+}
+.safe-range{
+	font-size: 2.5em;
+	float: right;
+}
+.prompt-tip1,.prompt-value1{
+	display: inline-block;
+}
+.current-heart-rate,.safe-range{
+	display: inline-block;
+}
+/*运动强度*/
+.intensity-txt,.intensity-value{
+	font-size: 3em;
+	display: inline-block;
+	color:gray;
+}
+.exercise-intensity{
+	position: absolute;
+	top: 60%;
+}
+.return-and-setup{
+	position: absolute;
+	top: 60%;
+	right: 10%;
+}
+/*返回、设置*/
+.return-and-setup{
+	font-size: 3em;
+	float: right;
+	color:gray;
+}
+.exercise-intensity,.return-and-setup{
+	display: inline-block;
+}
+/*按钮*/
+button{
+	background: #000000;
+	border: 0px;
+}
+/*弹出菜单*/
+#popover{
+	color: black;
+	font-size: 2em;
+}
+/*时间*/
+#time-element{
+	font-size: 2.5em;
+}
+#second-element{
+	font-size: 1.5em;
+}
+.timenum,.dayinfo{
+	font-size: 3em;
+	color:gray
+}
+

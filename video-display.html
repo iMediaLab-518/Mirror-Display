@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Magic Mirror Viedo Display</title>
+		<link rel="stylesheet" href="Modules/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="Modules/css/bootstrap.min.css">
+		<link rel="stylesheet" href="Modules/css/viedo-display.css" />
+
+	</head>
+	<body>
+		<div class="container">
+			<!--心率提示-->
+			<div class="heart-rate-prompt">
+				<div class="current-heart-rate">
+					<div class="prompt-tip1">
+						当前心率：
+					</div>
+					<div class="prompt-value1">
+						120bpm
+					</div>
+					<div class="prompt-txt">
+						您当前的心率正常。
+					</div>
+				</div>
+				<div class="safe-range">
+					<div class="prompt-tip2">
+						<span class="glyphicon glyphicon-record"> 您的心率安全范围</span>
+					</div>
+					<div class="prompt-value2">
+						111.42 bpm ~ 129.99 bpm
+					</div>
+				</div>
+			</div>
+			<!--视频播放-->
+			<div class="video-displaying">
+				<video src="Resource/video/1.热身.mp4" style="margin-top: 30%;width: 100%;" controls="controls"></video>
+			</div>
+			<div id="popover" class="mui-popover">
+				  <ul class="mui-table-view">
+				    <li class="mui-table-view-cell"><a href="#">声音</a></li>
+				    <li class="mui-table-view-cell"><a href="#">屏幕锁定</a></li>
+				  </ul>
+				</div>
+				
+
+
+			<!--运动强度-->
+			<div class="exercise-intensity">
+				<div class="intensity-txt">
+					运动强度: 
+				</div>
+				<div class="intensity-value">
+					3
+				</div>
+			</div>
+			<!--返回、设置图标-->
+			<div class="return-and-setup">
+				<button class="Return">
+					<span id="return" class="glyphicon glyphicon-triangle-left"></span>
+				</button>
+				<button class="SetUp">
+					<a href="#popover" id="openPopover"  style="color: white;">
+						<span id="setup" class="glyphicon glyphicon-option-horizontal" style="color: gray;">
+						</span>	
+					</a>	
+				</button>
+				
+				
+			</div>
+			<!--时间／日期-->	
+			<div class="time-and-date">
+				<!-- 底部日期时间+天气信息-->
+				<nav class="navbar navbar-fixed-bottom">
+					<div class="container-fluid information-table">
+						<div class="row">
+							<div class="normal-table col-md-7">
+								<div class="timenum col-md-12">
+									<span id="time-element">00:00</span>
+									<span id="second-element">:00</span>
+								</div>
+								<div class="dayinfo col-md-12">
+									<span id="date-element">2018-05-09</span>
+									<span id="week-element">N/A</span>
+								</div>
+							</div>
+		
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="Modules/js/jquery-3.3.1.min.js"></script>
+	
+	<script type="text/javascript" src="Modules/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Modules/js/echarts.min.js"></script>
+	<script type="text/javascript" src="Modules/js/moment.min.js"></script>
+	<script type="text/javascript" src="Modules/js/crypto-js.js"></script>
+	<script type="text/javascript" src="Modules/js/hmac-sha1.js"></script>
+	<script type="text/javascript" src="Modules/js/video-display.js" ></script>
+	<script type="text/javascript" src="Modules/js/mui.min.js" ></script>
+</html>

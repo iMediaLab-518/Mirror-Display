@@ -1,0 +1,23 @@
+body{
+	background-color: black;
+	color: white;
+}
+/*运动强度*/
+.intensity-value,.intensity-txt{
+	display: inline-block;
+	margin: 1em 1em 1em 0em;
+}
+/*视频简介*/
+.video-intro{
+	color: darkgray;
+	font-size: 2.7em;
+	padding-left: 2em;
+	padding-top: 1.5em;
+}
+.video-time-txt{
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+
+

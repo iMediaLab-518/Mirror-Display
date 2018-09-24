@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 1080px;
+	height: 1920px;
+	background: #000000;
+	color: white;
+	
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.words-leading{
+	text-align: center;
+	position: absolute;
+	top: 40%;
+	font-size: 3em;
+}
+.leading-button{
+	/*position: absolute;*/
+	margin-top: 90%;
+}
