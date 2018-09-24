@@ -6,6 +6,7 @@ body{
 .intensity-value,.intensity-txt{
 	display: inline-block;
 	margin: 1em 1em 1em 0em;
+
 }
 /*视频简介*/
 .video-intro{

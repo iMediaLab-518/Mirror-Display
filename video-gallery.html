@@ -13,44 +13,26 @@
 		<div class="container">
 			<!--顶部导航-->
 			<div id="head-bar">
-				<h1>全部视频</h1>
-				<hr />
+				<h1>
+					<span class="glyphicon glyphicon-film"></span>
+					全部视频
+					<hr />
+				</h1>
 			</div>
+			
 			<!--运动强度-->
 			<div class="exercise-intensity">
-				<div class="intensity-txt">
-					<h2>运动强度: </h2>
-				</div>
-				<div class="intensity-value">
-					<h2>
-						<span class="glyphicon glyphicon-star"></span>
-					</h2>
-					
-				</div>
+				<my-intensity v-for="post in posts"
+					:key="post.id"
+					:post="post"
+					></my-intensity>
 			</div>
 			<!--视频-->
 			<div class="video-gallery-item">
-				<div class="media">
-					<!--视频封面-->
-					<div class="media-left video-cover">
-						<a href="#">
-							<img src="Resource/video/cover1.png" />
-						</a>
-					</div>
-					<!--视频简介-->
-					<div class="media-body video-intro">
-						<div class="video-name">
-							热身操1
-						</div>
-						<div class="video-time-txt">
-							用时：2'30''
-						</div>
-						<div class="calorie-loss">
-							燃脂：约 2 千卡
-						</div>
-						
-					</div>
-				</div>
+				<my-video v-for="post in posts" 
+					v-bind:key='post.id' 
+					v-bind:post='post'>
+				</my-video>
 			</div>
 				
 			<!--分割线-->
